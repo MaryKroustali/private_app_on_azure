@@ -30,15 +30,9 @@ resource sql_server 'Microsoft.Sql/servers@2023-08-01-preview' = {
   }
 }
 
-// Existing resource group with network resources
-resource vnet_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
-  scope: subscription()
-  name: vnet_rg_name
-} 
-
 // A private endpoint is used to enable private access to the server
 module pep '../network/pep.bicep' = {
-  scope: vnet_rg
+  scope: resourceGroup(vnet_rg_name)
   name: 'deploy-pep-${name}'
   params: {
     name: 'pep-${name}'

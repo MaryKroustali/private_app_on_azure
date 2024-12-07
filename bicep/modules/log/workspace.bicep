@@ -11,21 +11,21 @@ param name string
   'PerNode'
   'Standalone'
 ])
-param skuName string
+param sku_name string
 
 @description('Resource Location.')
 param location string = resourceGroup().location
 
 @description('The workspace data retention in days.')
-param retentionInDays int?
+param retention_in_days int?
 
 resource log 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: name
   location: location
   properties:{
     sku: {
-      name: skuName
+      name: sku_name
     }
-    retentionInDays: retentionInDays
+    retentionInDays: retention_in_days
   }
 }

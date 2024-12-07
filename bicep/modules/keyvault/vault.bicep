@@ -9,7 +9,7 @@ param location string = resourceGroup().location
   'premium'
   'standard'
 ])
-param skuName string
+param sku_name string
 
 @description('Id of the private endpoints\' subnet.')
 param pep_snet_id string
@@ -22,7 +22,7 @@ param vnet_rg_name string
   'Disabled'
   'Enabled'
 ])
-param publicNetworkAccess string
+param public_network_access string
 
 @description('''
 Property specifying whether protection against purge is enabled for this vault. Setting this property to `true` activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. 
@@ -30,20 +30,20 @@ Property specifying whether protection against purge is enabled for this vault. 
 
 Enabling this functionality is irreversible - that is, the property does not accept false as its value.
 ''')
-param enablePurgeProtection bool = true
+param purge_protection bool = true
 
 @description('Property to specify whether the `soft delete` functionality is enabled for this key vault. Default value is set to `true`. Once set to `true`, it cannot be reverted to `false`.')
-param enableSoftDelete bool = false
+param soft_delete bool = false
 
 @description('''
 Property that controls how data actions are authorized. 
 
 When `true`, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the `accessPolicies` specified in vault properties will be ignored. When `false`, the key vault will use the `accessPolicies` specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of `false`. Note that management actions are always authorized with RBAC.
 ''')
-param enableRbacAuthorization bool = true
+param rbac_authorization bool = true
 
 @description('Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.')
-param enabledForTemplateDeployment bool = true
+param template_deployment bool = true
 
 
 var dns_zone = 'privatelink.vaultcore.azure.net'  // Private DNS zone for key vault
@@ -54,26 +54,20 @@ resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
   properties: {
     sku: {
       family: 'A'
-      name: skuName
+      name: sku_name
     }
     tenantId: subscription().tenantId
-    enabledForTemplateDeployment: enabledForTemplateDeployment
-    enableRbacAuthorization: enableRbacAuthorization
-    enableSoftDelete: enableSoftDelete
-    enablePurgeProtection: enablePurgeProtection
-    publicNetworkAccess: publicNetworkAccess
+    enabledForTemplateDeployment: template_deployment
+    enableRbacAuthorization: rbac_authorization
+    enableSoftDelete: soft_delete
+    enablePurgeProtection: purge_protection
+    publicNetworkAccess: public_network_access
   }
 }
 
-// Existing resource group with network resources
-resource vnet_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
-  scope: subscription()
-  name: vnet_rg_name
-} 
-
 // A private endpoint is used to enable private access to the key vault
 module pep '../network/pep.bicep' = {
-  scope: vnet_rg
+  scope: resourceGroup(vnet_rg_name)
   name: 'deploy-pep-${name}'
   params: {
     name: 'pep-${name}'

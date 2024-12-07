@@ -6,6 +6,9 @@ param application string
 param sql_server_admin_username string
 @secure()
 param sql_server_admin_password string
+param vm_admin_username string
+@secure()
+param vm_admin_password string
 
 var vnet_rg_name = 'rg-network-infra-${application}'
 var snet_pep_name = 'snet-pep-vnet-${application}'
@@ -13,12 +16,8 @@ var vnet_name = 'vnet-${application}'
 
 
 // Existing network resources from previous deployments
-resource vnet_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
-  name: vnet_rg_name
-} 
-
 resource vnet 'Microsoft.Network/virtualNetworks@2024-03-01' existing = {
-  scope: vnet_rg
+  scope: resourceGroup(vnet_rg_name)
   name: vnet_name
 }
 
@@ -38,10 +37,10 @@ module kv '../modules/keyvault/vault.bicep' = {
   name: 'deploy-kv-${application}'
   params: {
     name: 'kv-${application}'
-    vnet_rg_name: vnet_rg.name
+    vnet_rg_name: vnet_rg_name
     pep_snet_id: snet_pep.id
-    publicNetworkAccess: 'Disabled'
-    skuName: 'premium'
+    public_network_access: 'Disabled'
+    sku_name: 'premium'
   }
 }
 
@@ -71,6 +70,22 @@ module log '../modules/log/workspace.bicep' = {
   name: 'deploy-log-${application}'
   params: {
     name: 'log-${application}'
-    skuName: 'Standalone'
+    sku_name: 'Standalone'
+  }
+}
+
+module vm '../modules/vm/windows.bicep' = {
+  scope: rg
+  name: 'deploy-vm-${application}'
+  params: {
+    name: 'vm-${application}'
+    admin_password: vm_admin_password
+    admin_username: vm_admin_username
+    image_offer: 'WindowsServer'
+    image_publisher: 'MicrosoftWindowsServer'
+    image_sku: '2022-Datacenter'
+    snet_id: snet_pep.id
+    vm_size: 'Standard_B1ms'
+    vnet_rg_name: vnet_rg_name
   }
 }
