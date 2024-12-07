@@ -16,6 +16,13 @@ param pep_snet_id string
 @description('Name of the Network Resources\' Resource Group.')
 param vnet_rg_name string
 
+@description('Instrumentation Key of the Application Insights resource.')
+param appi_instrumentation_key string
+
+@description('Connection string of the Application Insights resource.')
+param appi_connection_string string
+
+
 var dns_zone = 'privatelink.azurewebsites.net'  // Private DNS zone for web apps
 
 resource app_service 'Microsoft.Web/sites@2023-12-01' = {
@@ -25,6 +32,18 @@ resource app_service 'Microsoft.Web/sites@2023-12-01' = {
     serverFarmId: asp_id
     publicNetworkAccess: 'Disabled' // Disable public access to the application
     virtualNetworkSubnetId: app_snet_id  // Integrate with private network
+    siteConfig: {
+      appSettings: [  // Monitor the application using Application Insights
+        { 
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: appi_instrumentation_key
+        }
+        { 
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appi_connection_string
+        }
+      ]
+    }
   }
 }
 

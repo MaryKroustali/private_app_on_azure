@@ -57,6 +57,15 @@ module app '../modules/webapp/app.bicep' = {
     app_snet_id: snet_app.id
     pep_snet_id: snet_pep.id
     vnet_rg_name: vnet_rg.name
+    appi_instrumentation_key: appi.outputs.instrumentation_key
+    appi_connection_string: appi.outputs.connection_string
   }
 }
 
+module appi '../modules/webapp/insights.bicep' = {
+  scope: rg
+  name: 'deploy-appi-${application}'
+  params: {
+    name: 'appi-${application}'
+  }
+}
