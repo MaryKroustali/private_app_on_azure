@@ -70,7 +70,7 @@ module bastion '../modules/network/bastion.bicep' = {
   name: 'deploy-bastion-${application}'
   params: {
     name: 'bastion-${application}'
-    sku_name: 'Developer'
+    sku_name: 'Basic'
     snet_id: vnet.outputs.bastion_snet_id
   }
 }

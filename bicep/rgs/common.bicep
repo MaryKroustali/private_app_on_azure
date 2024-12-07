@@ -65,6 +65,27 @@ module sql_password '../modules/keyvault/secret.bicep' = {
   }
 }
 
+// Add VM credentials to key vault
+module vm_username '../modules/keyvault/secret.bicep' = {
+  scope: rg
+  name: 'deploy-secret-vm-username'
+  params: {
+    name: 'vm-admin-username'
+    kv_name: kv.outputs.name
+    value: vm_admin_username
+  }
+}
+
+module vm_password '../modules/keyvault/secret.bicep' = {
+  scope: rg
+  name: 'deploy-secret-vm-password'
+  params: {
+    name: 'vm-admin-password'
+    kv_name: kv.outputs.name
+    value: vm_admin_password
+  }
+}
+
 module log '../modules/log/workspace.bicep' = {
   scope: rg
   name: 'deploy-log-${application}'
