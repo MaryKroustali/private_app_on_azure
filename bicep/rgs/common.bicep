@@ -71,6 +71,6 @@ module log '../modules/log/workspace.bicep' = {
   name: 'deploy-log-${application}'
   params: {
     name: 'log-${application}'
-    skuName: 'Free'
+    skuName: 'Standalone'
   }
 }

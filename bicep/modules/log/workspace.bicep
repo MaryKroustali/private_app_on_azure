@@ -6,13 +6,10 @@ param name string
 @description('Name of the SKU for the Log Analytics Workspace.')
 @allowed([
   'CapacityReservation'
-  'Free'
   'LACluster'
   'PerGB2018'
   'PerNode'
-  'Premium'
   'Standalone'
-  'Standard' 
 ])
 param skuName string
 
