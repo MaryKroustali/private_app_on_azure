@@ -65,3 +65,12 @@ module sql_password '../modules/keyvault/secret.bicep' = {
     value: sql_server_admin_password
   }
 }
+
+module log '../modules/log/workspace.bicep' = {
+  scope: rg
+  name: 'deploy-log-${application}'
+  params: {
+    name: 'log-${application}'
+    skuName: 'Free'
+  }
+}

@@ -1,6 +1,9 @@
 @description('Resource Name.')
 param name string
 
+@description('Id of the Log Analytics Workspace.')
+param log_id string
+
 @description('Resource Location.')
 param location string = resourceGroup().location
 
@@ -13,6 +16,7 @@ resource appi 'Microsoft.Insights/components@2020-02-02' = {
   kind: kind
   properties: {
     Application_Type: kind
+    WorkspaceResourceId: log_id
   }
 }
 

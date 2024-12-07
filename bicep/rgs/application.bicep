@@ -8,9 +8,11 @@ var vnet_rg_name = 'rg-network-infra-${application}'
 var snet_pep_name = 'snet-pep-vnet-${application}'
 var snet_app_name = 'snet-app-vnet-${application}'
 var vnet_name = 'vnet-${application}'
+var common_rg_name = 'rg-common-infra-${application}'
+var log_name = 'log-${application}'
 
 
-// Existing network resources from previous deployments
+// Existing resources from previous deployments
 resource vnet_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
   name: vnet_rg_name
 } 
@@ -30,6 +32,14 @@ resource snet_app 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' existin
   name: snet_app_name
 }
 
+resource common_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
+  name: common_rg_name
+} 
+
+resource log 'Microsoft.OperationalInsights/workspaces@2023-09-01' existing = {
+  scope: common_rg
+  name: log_name
+}
 
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
@@ -67,5 +77,6 @@ module appi '../modules/webapp/insights.bicep' = {
   name: 'deploy-appi-${application}'
   params: {
     name: 'appi-${application}'
+    log_id: log.id
   }
 }
