@@ -1,1 +1,1 @@
-# private_app_on_azure
+# App on Azure with Advanced Configurations
