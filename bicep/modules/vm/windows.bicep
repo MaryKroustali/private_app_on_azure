@@ -77,6 +77,9 @@ module nsg '../network/nsg.bicep' = {
           priority: 100
           protocol: 'Tcp'
           destinationPortRange: '3389'  // Allow incoming traffic in 3389 (RDP) for Bastion Host
+          sourcePortRange: '*'
+          sourceAddressPrefix: '*'
+          destinationAddressPrefix: '*'
         }
       }
     ]
