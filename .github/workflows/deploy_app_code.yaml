@@ -18,11 +18,11 @@ on:  # Trigger this workflow manually
 
 permissions:
   id-token: write
-      
+
 jobs:
   deploy_app_code:
     name: Deploy Application Source Code to WebApp
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - name: "Login to Azure"
         uses: azure/login@v1

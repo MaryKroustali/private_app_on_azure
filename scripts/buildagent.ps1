@@ -1,3 +1,6 @@
+# Edit below commands based on guidelines in 
+# Github Repository Settings > Actions > Runners > New self-hosted runner (Windows)
+
 # Create a folder under the drive root
 mkdir actions-runner; cd actions-runner
 # Download the latest runner package
