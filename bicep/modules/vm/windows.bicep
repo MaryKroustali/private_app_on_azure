@@ -150,3 +150,21 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-09-01' = {
     }
   }
 }
+
+resource ext 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' = {
+  parent: vm
+  name: 'AzureDevopsAgent'
+  location: location
+  properties: {
+    publisher: 'Microsoft.Compute'
+    type: 'CustomScriptExtension'
+    typeHandlerVersion: '1.10'
+    autoUpgradeMinorVersion: true
+    settings: {
+      fileUris: [ 'https://raw.githubusercontent.com/MaryKroustali/private_app_on_azure/main/scripts/buildagent.ps1' ]
+    }
+    protectedSettings: {
+      commandToExecute: 'powershell.exe scripts/buildagent.ps1'
+    }
+  }
+}
