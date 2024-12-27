@@ -1,18 +1,18 @@
 @description('Resource Name.')
-param sql_db_name string
+param name string
 
 @description('Resource Location.')
-param sql_db_location string = resourceGroup().location
+param location string = resourceGroup().location
 
 @description('Name of the associated SQL Server.')
-param sql_server_name string
+param server_name string
 
 resource sql_server 'Microsoft.Sql/servers@2023-08-01-preview' existing = {
-  name: sql_server_name
+  name: server_name
 }
 
 resource sqql_database 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
   parent: sql_server
-  name: sql_db_name
-  location: sql_db_location
+  name: name
+  location: location
 }

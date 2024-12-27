@@ -1,14 +1,14 @@
 @description('Resource Name.')
-param vnet_name string
+param name string
 
 @description('Resource Location.')
-param vnet_location string = resourceGroup().location
+param location string = resourceGroup().location
 
 @description('Address space for this virtual network.')
-param vnet_address_prefixes array
+param address_prefixes array
 
 @description('Array of subnets.')
-param vnet_subnets subnet
+param subnets subnet
 
 // Custom data type for object of type subnet
 type subnet = {
@@ -27,15 +27,18 @@ type subnet = {
 }[]
 
 resource virtual_network 'Microsoft.Network/virtualNetworks@2024-03-01' = {
-  name: vnet_name
-  location: vnet_location
+  name: name
+  location: location
   properties: {
     addressSpace: {
-      addressPrefixes: vnet_address_prefixes
+      addressPrefixes: address_prefixes
     }
-    subnets: vnet_subnets
+    subnets: subnets
   }
 }
 
 // Export array of subnets in main.bicep
-output subnets array = virtual_network.properties.subnets
+output app_snet_id string = virtual_network.properties.subnets[0].id
+output pep_snet_id string = virtual_network.properties.subnets[1].id
+output bastion_snet_id string = virtual_network.properties.subnets[2].id
+output id string = virtual_network.id
