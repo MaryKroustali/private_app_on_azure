@@ -15,12 +15,8 @@ var sql_username_kv_secret = 'sql-server-admin-username'
 var sql_password_kv_secret = 'sql-server-admin-password'
 
 // Existing resources from previous deployments
-resource vnet_rg 'Microsoft.Resources/resourceGroups@2024-07-01' existing = { 
-  name: vnet_rg_name
-} 
-
 resource vnet 'Microsoft.Network/virtualNetworks@2024-03-01' existing = {
-  scope: vnet_rg
+  scope: resourceGroup(vnet_rg_name)
   name: vnet_name
 }
 
@@ -52,7 +48,7 @@ module sql_server '../modules/sql/server.bicep' = {
     admin_username: kv.getSecret(sql_username_kv_secret)  // get useraname from Key Vault
     name: 'sql-${application}'
     pep_snet_id: snet_pep.id
-    vnet_rg_name: vnet_rg.name
+    vnet_rg_name: vnet_rg_name
   }
 }
 

@@ -40,4 +40,5 @@ resource virtual_network 'Microsoft.Network/virtualNetworks@2024-03-01' = {
 // Export array of subnets in main.bicep
 output app_snet_id string = virtual_network.properties.subnets[0].id
 output pep_snet_id string = virtual_network.properties.subnets[1].id
+output bastion_snet_id string = virtual_network.properties.subnets[2].id
 output id string = virtual_network.id
