@@ -164,7 +164,7 @@ resource ext 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' = {
       fileUris: [ 'https://raw.githubusercontent.com/MaryKroustali/private_app_on_azure/main/scripts/buildagent.ps1' ]
     }
     protectedSettings: {
-      commandToExecute: 'powershell.exe scripts/buildagent.ps1'
+      commandToExecute: 'powershell.exe -ExecutionPolicy Unrestricted -File scripts/buildagent.ps1'
     }
   }
 }
