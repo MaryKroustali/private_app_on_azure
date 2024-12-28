@@ -22,7 +22,7 @@ permissions:
 jobs:
   deploy_app_code:
     name: Deploy Application Source Code to WebApp
-    runs-on: self-hosted
+    runs-on: windows-latest
     steps:
       - name: "Login to Azure"
         uses: azure/login@v1
