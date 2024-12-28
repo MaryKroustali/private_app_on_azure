@@ -24,6 +24,8 @@ jobs:
     name: Deploy Application Source Code to WebApp
     runs-on: self-hosted
     steps:
+      - name: "test manual login"
+        run: az login
       - name: "Login to Azure"
         uses: azure/login@v2
         with:
