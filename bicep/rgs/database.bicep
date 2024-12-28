@@ -4,7 +4,7 @@ targetScope = 'subscription'
 
 param application string
 
-// param sql_db_name string
+param sql_db_name string
 
 var vnet_rg_name = 'rg-network-infra-${application}'
 var snet_pep_name = 'snet-pep-vnet-${application}'
@@ -52,11 +52,11 @@ module sql_server '../modules/sql/server.bicep' = {
   }
 }
 
-// module sql_db 'modules/sql/database.bicep' = {
-//   scope: rg
-//   name: 'deploy-sql-db-${application}'
-//   params: {
-//     name: sql_db_name
-//     server_name: sql_server.outputs.name
-//   }
-// }
+module sql_db '../modules/sql/database.bicep' = {
+  scope: rg
+  name: 'deploy-sql-db-${application}'
+  params: {
+    name: sql_db_name
+    server_name: sql_server.outputs.name
+  }
+}

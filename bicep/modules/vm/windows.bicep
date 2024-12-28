@@ -151,6 +151,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2023-09-01' = {
   }
 }
 
+// Configures Virtual Machine as a GitHub Runner to run workflows on private resources
 resource ext 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' = {
   parent: vm
   name: 'AzureDevopsAgent'
@@ -161,10 +162,10 @@ resource ext 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' = {
     typeHandlerVersion: '1.10'
     autoUpgradeMinorVersion: true
     settings: {
-      fileUris: [ 'https://raw.githubusercontent.com/MaryKroustali/private_app_on_azure/main/scripts/buildagent.ps1' ]
+      fileUris: [ 'https://raw.githubusercontent.com/MaryKroustali/private_app_on_azure/main/scripts/buildagent.ps1' ]  // script configuring the runner
     }
     protectedSettings: {
-      commandToExecute: 'powershell.exe -ExecutionPolicy Unrestricted -File buildagent.ps1'
+      commandToExecute: 'powershell.exe -ExecutionPolicy Unrestricted -File buildagent.ps1'  // run the script upon initializing the Virtual Machine
     }
   }
 }
