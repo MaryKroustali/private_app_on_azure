@@ -22,8 +22,11 @@ permissions:
 jobs:
   deploy_app_code:
     name: Deploy Application Source Code to WebApp
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
+      - name: "Install Az CLI"
+        run: |
+          $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
       - name: "Login to Azure"
         uses: azure/login@v1
         with:
