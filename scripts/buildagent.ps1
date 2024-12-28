@@ -11,4 +11,4 @@ Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.32
 # Extract the installer
 Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.321.0.zip", "$PWD")
 # Create the runner and start running as a service
-./config.cmd --runasservice --unattended --url https://github.com/MaryKroustali/private_app_on_azure --token AQ6ZEQESLMD54TOESQNDXK3HOAHZI
+./config.cmd --runasservice --unattended --url https://github.com/MaryKroustali/private_app_on_azure --token AQ6ZEQHFMACQJNNSFGC23YLHOAP7W
