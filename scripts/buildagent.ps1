@@ -31,7 +31,7 @@ $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$org/$repo/acti
 # Extract the token from the response
 $registrationToken = $response.token
 # Create the runner and start running as a service
-./config.cmd --runasservice --unattended --url https://github.com/$org/$repo/ --token $registrationToken
+./config.cmd --runasservice --unattended --url https://github.com/$org/$repo/ --token $registrationToken --replace
 
 # Install az cli
 Invoke-WebRequest -Uri https://aka.ms/installazurecliwindowsx64 -OutFile .\AzureCLI.msi;
