@@ -107,4 +107,4 @@ The [scripts/buildagent.ps1](./scripts/buildagent.ps1) is used to configure the 
 - Installs the Azure CLI tool, which is essential for running workflow jobs that leverage the `azure/login@v1` action.
 
 # Next Steps
-containerized_app_on_azure: Deploying the Record Store application containerized on Azure.
+[container_app_on_azure](https://github.com/MaryKroustali/container_app_on_azure): Deploying the Record Store application containerized on Azure.
