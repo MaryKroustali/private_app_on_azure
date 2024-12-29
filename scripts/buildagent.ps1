@@ -5,12 +5,13 @@
 
 
 # Define your variables
-$org = "MaryKroustali"  # Replace with your GitHub organization name
-$repo = "private_app_on_azure"  # Replace with your GitHub repository name
 param(
     [Parameter(Mandatory=$true)]
     [string]$token    # GitHub API token passed as a script parameter from Bicep
 )
+
+$org = "MaryKroustali"  # Replace with your GitHub organization name
+$repo = "private_app_on_azure"  # Replace with your GitHub repository name
 
 # Create a folder under admin directory
 cd C:/
