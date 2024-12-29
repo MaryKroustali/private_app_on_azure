@@ -26,7 +26,11 @@ jobs:
     steps:
       - name: "Install Az CLI."
         shell: powershell
-        run: $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindowsx64 -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; Remove-Item .\AzureCLI.msi
+        run: | 
+          Invoke-WebRequest -Uri https://aka.ms/installazurecliwindowsx64 -OutFile .\AzureCLI.msi; 
+          Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi'; 
+          Remove-Item .\AzureCLI.msi
+          az --version
       - name: "Login to Azure"
         uses: azure/login@v2
         with:
