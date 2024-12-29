@@ -27,16 +27,17 @@ jobs:
       - name: "Install Az CLI."
         shell: powershell
         run: | 
-          # az --version
+          $env:PATH = $env:PATH + ";C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin"
           Write-Output $env:PATH
-      # - name: "Login to Azure"
-      #   uses: azure/login@v2
-      #   with:
-      #     # Set secrets value as described in https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect#prerequisites
-      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     enable-AzPSSession: true
+          az --version
+      - name: "Login to Azure"
+        uses: azure/login@v2
+        with:
+          # Set secrets value as described in https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect#prerequisites
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
       # - name: "Checkout Application repository"
       #   uses: actions/checkout@main
       #   with:
