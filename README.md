@@ -35,7 +35,9 @@ Access denied when attempting to connect from outside the VNet, over Internet.
 
 ## Resource Groups Overview
 
-The deployment is organized into four Azure Resource Groups (RGs) using Bicep templates located in [bicep/rgs/](./bicep/rgs/), with each RG handling a specific area of responsibility. The structure ensures modularity and clarity in resource management.
+The deployment is organized into four Azure Resource Groups (RGs) using Bicep templates located in [bicep/rgs/](./bicep/rgs/), with each RG handling a specific area of responsibility. The structure ensures modularity and clarity in resource management. The architecture deployed is the following:
+
+![archtecture](./images/architecture.jpg)
 
 ### 1. Network Infrastructure RG (`rg-network-infra-record-store`)
 
