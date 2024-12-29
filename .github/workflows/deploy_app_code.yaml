@@ -30,7 +30,7 @@ jobs:
           repository: ${{ inputs.application_repo }}
           path: record_store_app      
       - name: "Login to Azure"
-        uses: azure/login@v2
+        uses: azure/login@v1
         with:
           # Set secrets value as described in https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect#prerequisites
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
