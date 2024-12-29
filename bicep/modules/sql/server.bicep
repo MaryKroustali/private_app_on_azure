@@ -18,7 +18,8 @@ param pep_snet_id string
 @description('Name of the Network Resources\' Resource Group.')
 param vnet_rg_name string
 
-var dns_zone = 'privatelink.azurewebsites.net'  // Private DNS zone for web apps
+#disable-next-line no-hardcoded-env-urls
+var dns_zone = 'privatelink.database.windows.net'  // Private DNS zone for web apps
 
 resource sql_server 'Microsoft.Sql/servers@2023-08-01-preview' = {
   name: name
