@@ -7,14 +7,14 @@ This deployment ensures all resources operate privately within the VNet, avoidin
 
 ### Private Endpoints
 
-Private endpoints are used to enable private IP-based access to resources such as SQL Server, App Service, and Key Vault within the VNet. Each private endpoint is associated with a Network Interface Card (NIC), which is assigned a private IP address from the VNet's address space. This ensures that access to the resource occurs entirely within the private network.
+Private endpoints are used to enable private IP-based access to resources such as SQL Server, App Service and Key Vault within the VNet. Each private endpoint is associated with a Network Interface Card (NIC), which is assigned a private IP address from the VNet's address space. This ensures that access to the resource occurs entirely within the private network.
 
 ### Azure Private DNS Zones
 
 Azure Private DNS Zones provide name resolution for private endpoints, ensuring seamless connectivity without requiring public IPs. DNS zones are configured to map resource names (e.g. app-record-store.azurewebsites.net) to their private IPs.
 This enables applications within the VNet to access resources using standard DNS names.
 
-### Private DNS Zone Group
+### Private DNS Zone Groups
 
 The Private DNS Zone Group acts as a bridge between the private endpoint and the private DNS zone, creating and managing DNS records for private connectivity. A DNS record is automatically created in the Private DNS Zone for the private IP associated with the endpoint, mapping the private IP to the DNS name.
 
@@ -71,7 +71,7 @@ This RG manages the database infrastructure:
 
 ### Deployment Modules
 
-All resources are defined in reusable Bicep modules located in the [bicep/modules](./bicep/modules/) directory, organized by resource type (e.g. network, webapp, sql). This modular approach ensures consistency, reusability, and clarity across deployments.
+All resources are defined in reusable Bicep modules located in the [bicep/modules](./bicep/modules/) directory, organized by resource type (e.g. network, webapp, sql). This modular approach ensures consistency, reusability and clarity across deployments.
 
 ## GitHub Actions
 The deployment process is orchestrated through GitHub Actions workflows, located in the [.github/workflows/](./.github/workflows/) directory, similar to the workflows in the [App on Azure CICD Repository](https://github.com/MaryKroustali/app_on_azure_cicd).
@@ -105,3 +105,6 @@ The [scripts/buildagent.ps1](./scripts/buildagent.ps1) is used to configure the 
 - Follows the instructions provided under `Github Repository Settings > Actions > Runners > New self-hosted runner (Windows)` to register the runner with the repository.
 
 - Installs the Azure CLI tool, which is essential for running workflow jobs that leverage the `azure/login@v1` action.
+
+# Next Steps
+containerized_app_on_azure: Deploying the Record Store application containerized on Azure.
