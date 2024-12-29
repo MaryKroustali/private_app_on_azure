@@ -62,6 +62,9 @@ param vnet_rg_name string
 @description('Resource Id of the Subnet for the Network Interface Card to get an IP.')
 param snet_id string
 
+@description('GitHub Personal Access Token to register Virtual Machine to Github Runners.')
+param github_pat string
+
 // Network Security Group
 module nsg '../network/nsg.bicep' = {
   scope: resourceGroup(vnet_rg_name)  // Deploy in Network RG
@@ -165,7 +168,7 @@ resource ext 'Microsoft.Compute/virtualMachines/extensions@2024-07-01' = {
       fileUris: [ 'https://raw.githubusercontent.com/MaryKroustali/private_app_on_azure/main/scripts/buildagent.ps1' ]  // script configuring the runner
     }
     protectedSettings: {
-      commandToExecute: 'powershell.exe -ExecutionPolicy Unrestricted -File buildagent.ps1'  // run the script upon initializing the Virtual Machine
+      commandToExecute: 'powershell.exe -ExecutionPolicy Unrestricted -File buildagent.ps1 -token ${github_pat}'  // run the script upon initializing the Virtual Machine
     }
   }
 }

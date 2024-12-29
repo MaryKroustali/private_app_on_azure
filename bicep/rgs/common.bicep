@@ -9,6 +9,7 @@ param sql_server_admin_password string
 param vm_admin_username string
 @secure()
 param vm_admin_password string
+param github_pat string
 
 var vnet_rg_name = 'rg-network-infra-${application}'
 var snet_pep_name = 'snet-pep-vnet-${application}'
@@ -108,5 +109,6 @@ module vm '../modules/vm/windows.bicep' = {
     snet_id: snet_pep.id
     vm_size: 'Standard_B1ms'
     vnet_rg_name: vnet_rg_name
+    github_pat: github_pat
   }
 }
