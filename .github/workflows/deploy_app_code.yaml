@@ -39,7 +39,7 @@ jobs:
         env:
           PATH: C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Users\vmadmin\AppData\Local\Microsoft\WindowsApps;
       - name: "Deploy application code in Azure webapp"
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2.2.9
         with: 
           app-name: app-${{ inputs.application }}
           package: record_store_app/${{ inputs.application_repo_folder }}
