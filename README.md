@@ -1,6 +1,6 @@
 # App on Azure with Advanced Configurations
 
-This repository automates the deployment of the Record Store Application on Azure with private connectivity and a comprehensive set of resources for a secure and scalable infrastructure.
+This repository automates the deployment of the [Record Store Application](https://github.com/MaryKroustali/record_store_app) on Azure with private connectivity and a comprehensive set of resources for a secure and scalable infrastructure.
 
 ## Private Connectivity
 This deployment ensures all resources operate privately within the VNet, avoiding public exposure. Here's how private connectivity is achieved:
