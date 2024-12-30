@@ -86,6 +86,8 @@ The deployment process is orchestrated through GitHub Actions workflows, located
 
 - [Import Data to Database](.github/workflows/import_db_data.yaml) and [Deploy Application Code](.github/workflows/deploy_app_code.yaml) workflows are both using `runs-on: self-hosted` to run securely on the virtual machine provisioned within the private network.
 
+[![Deploy Infrastructure](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/deploy_infra.yaml/badge.svg)](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/deploy_infra.yaml) [![Deploy Application Code](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/deploy_app_code.yaml/badge.svg)](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/deploy_app_code.yaml) [![Import Data to Database](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/import_db_data.yaml/badge.svg)](https://github.com/MaryKroustali/private_app_on_azure/actions/workflows/import_db_data.yaml)
+
 #### Authentication
 
 Authentication to Azure follows the same process as described in the [App on Azure CICD Repository](https://github.com/MaryKroustali/app_on_azure_cicd). Additionally, the following secrets the following secrets are required:
